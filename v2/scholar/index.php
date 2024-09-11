@@ -7,5 +7,6 @@
 </head>
 <body>
     <h1 style="margin: auto;">Home page</h1>
+    <p>The dashboard of the scholar will be similar to that of the viewer but with a slight difference of having the ability to upload files</p>
 </body>
 </html>

@@ -7,5 +7,6 @@
 </head>
 <body>
     <h1 style="margin: auto;">Home page</h1>
+    <p>This is the highest level of user that has access to everything</p>
 </body>
 </html>
