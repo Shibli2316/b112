@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Repository</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+  <!-- Main Navbar -->
+  <header class="bg-gradient-to-r from-blue-500 to-blue-700 text-white p-4 rounded-b-lg shadow-md">
+    <div class="container mx-auto flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <span class="text-xl font-bold">Repository Name</span>
+      </div>
+      <button class="bg-white text-blue-700 py-1 px-4 rounded-lg hover:bg-gray-200">Login</button>
+    </div>
+  </header>
+
+  <!-- Second Navbar with Dropdowns -->
+  <nav class="container mx-auto mt-4 mb-6 p-4 bg-white shadow-md rounded-lg">
+    <ul class="flex justify-between space-x-4">
+      <li><a href="#" class="hover:text-blue-500">Home</a></li>
+      <li><a href="#" class="hover:text-blue-500">Data Upload</a></li>
+      <li class="relative group">
+        <a href="#" class="hover:text-blue-500">Datasets</a>
+        <ul class="absolute hidden group-hover:block bg-white shadow-lg mt-1 rounded-lg p-2">
+          <li><a href="#" class="block px-4 py-2 hover:bg-gray-200">Dataset 1</a></li>
+          <li><a href="#" class="block px-4 py-2 hover:bg-gray-200">Dataset 2</a></li>
+        </ul>
+      </li>
+      <li><a href="#" class="hover:text-blue-500">Subjects</a></li>
+      <li class="relative group">
+        <a href="#" class="hover:text-blue-500">Statistics</a>
+        <ul class="absolute hidden group-hover:block bg-white shadow-lg mt-1 rounded-lg p-2">
+          <li><a href="#" class="block px-4 py-2 hover:bg-gray-200">Statistic 1</a></li>
+          <li><a href="#" class="block px-4 py-2 hover:bg-gray-200">Statistic 2</a></li>
+        </ul>
+      </li>
+      <li class="relative group">
+        <a href="#" class="hover:text-blue-500">User Guide</a>
+        <ul class="absolute hidden group-hover:block bg-white shadow-lg mt-1 rounded-lg p-2">
+          <li><a href="#" class="block px-4 py-2 hover:bg-gray-200">Guide 1</a></li>
+          <li><a href="#" class="block px-4 py-2 hover:bg-gray-200">Guide 2</a></li>
+        </ul>
+      </li>
+      <li><a href="#" class="hover:text-blue-500">Repository Staff</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Content Section -->
+  <div class="container mx-auto px-4">
+    <!-- Search Section -->
+    <div class="bg-white p-4 rounded-lg shadow-md mb-6 flex items-center">
+      <span class="text-gray-600 font-semibold mr-2">Browse</span>
+      <input type="text" placeholder="Search here" class="w-full p-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-200">
+    </div>
+
+    <!-- Image Section -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+      <div class="bg-blue-100 h-40 rounded-lg flex items-center justify-center">Image 1</div>
+      <div class="bg-blue-100 h-40 rounded-lg flex items-center justify-center">Image 2</div>
+      <div class="bg-blue-100 h-40 rounded-lg flex items-center justify-center">Image 3</div>
+    </div>
+
+    <!-- About Section -->
+    <div class="bg-white p-4 rounded-lg shadow-md mb-6">
+      <p class="text-center text-gray-600">Small paragraph about the repository. It provides details on its purpose and the type of data it holds.</p>
+    </div>
+
+    <!-- Recently Added Datasets Section -->
+    <div class="bg-white p-4 rounded-lg shadow-md mb-6">
+      <h2 class="text-center text-lg font-semibold text-gray-700">Recently Added Datasets</h2>
+      <p class="text-center text-gray-500">Display of the most recently added datasets.</p>
+    </div>
+
+    <!-- Counters Section -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+      <div class="bg-gradient-to-r from-green-400 to-green-600 text-white p-4 rounded-lg shadow-md text-center">
+        <h3 class="text-xl font-semibold">Total Registered Users</h3>
+        <p class="text-2xl mt-2">1000+</p>
+      </div>
+      <div class="bg-gradient-to-r from-indigo-400 to-indigo-600 text-white p-4 rounded-lg shadow-md text-center">
+        <h3 class="text-xl font-semibold">Total Datasets</h3>
+        <p class="text-2xl mt-2">500+</p>
+      </div>
+      <div class="bg-gradient-to-r from-purple-400 to-purple-600 text-white p-4 rounded-lg shadow-md text-center">
+        <h3 class="text-xl font-semibold">Total Downloads</h3>
+        <p class="text-2xl mt-2">3000+</p>
+      </div>
+      <div class="bg-gradient-to-r from-pink-400 to-pink-600 text-white p-4 rounded-lg shadow-md text-center">
+        <h3 class="text-xl font-semibold">Total Hits</h3>
+        <p class="text-2xl mt-2">7000+</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Section -->
+  <footer class="bg-gray-800 text-white p-4 mt-6 rounded-t-lg">
+    <div class="container mx-auto text-center space-y-2">
+      <p>About Us | Contact Us | Project Team | Dataset Standards | Sitemap | Privacy Policy | FAQ</p>
+      <p>&copy; 2024 Repository. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
