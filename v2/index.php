@@ -10,10 +10,10 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     <style>
+        .group:hover .group-hover\:block {
+            display: block;
+        }
 
-.group:hover .group-hover\:block {
-        display: block;
-    }
         .category-cards {
             display: none;
         }
@@ -33,6 +33,46 @@
         main {
             flex: 1;
         }
+
+        /* Marquee container */
+        .marquee {
+            width: 100%;
+            overflow: hidden;
+            background-color: #4CAF50;
+            /* Green background */
+            padding: 10px 0;
+            position: relative;
+            border-radius: 8px;
+            /* Optional: Rounded corners */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+            /* Shadow effect to pop out */
+        }
+
+        /* Marquee text */
+        .marquee p {
+            display: inline-block;
+            white-space: nowrap;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #ffffff;
+            animation: scroll 10s linear infinite;
+            /* Adjust time to control speed */
+            margin: 0;
+            width: 100%;
+        }
+
+        /* Animation for scrolling */
+        @keyframes scroll {
+            0% {
+                transform: translateX(100%);
+                /* Start from the right edge */
+            }
+
+            100% {
+                transform: translateX(-100%);
+                /* Move to the left edge */
+            }
+        }
     </style>
 
     <!-- CHange ends here -->
@@ -42,61 +82,13 @@
 
 <body>
     <!-- Navigation Bar -->
-    <header class="bg-white text-black p-4 rounded-b-lg shadow-md">
-    <div class="container mx-auto flex justify-between items-center">
-
-        <!-- Leftmost Logo -->
-        <div class="flex items-center space-x-2">
-            <img src="left-logo.png" alt="Left Logo" class="h-8 w-8">
-            <span class="text-xl font-bold">Repository Name</span>
-        </div>
-
-        <!-- Rightmost Logo and Login Button -->
-        <div class="flex items-center space-x-4">
-            <button class="bg-black text-white py-1 px-4 rounded-lg hover:bg-gray-300 hover:text-black">Login</button>
-            <img src="right-logo.png" alt="Right Logo" class="h-8 w-8">
-        </div>
-
-    </div>
-</header>
-
-
-    <!-- Centered and Wider Navigation Bar -->
-    <nav class="w-3/4 lg:w-2/3 mx-auto mt-4 mb-6 p-4 bg-white shadow-md rounded-lg">
-    <ul class="flex justify-between space-x-4">
-        <li><a href="#" class="hover:text-blue-500">Home</a></li>
-        <li><a href="#" class="hover:text-blue-500">Data Upload</a></li>
-        <li class="relative group">
-            <a href="#" class="hover:text-blue-500">Datasets</a>
-            <ul class="absolute hidden group-hover:block bg-white shadow-lg mt-1 rounded-lg p-2">
-                <li><a href="#" class="block px-4 py-2 hover:bg-gray-200">Dataset 1</a></li>
-                <li><a href="#" class="block px-4 py-2 hover:bg-gray-200">Dataset 2</a></li>
-            </ul>
-        </li>
-        <li><a href="#" class="hover:text-blue-500">Subjects</a></li>
-        <li class="relative group">
-            <a href="#" class="hover:text-blue-500">Statistics</a>
-            <ul class="absolute hidden group-hover:block bg-white shadow-lg mt-1 rounded-lg p-2">
-                <li><a href="#" class="block px-4 py-2 hover:bg-gray-200">Statistic 1</a></li>
-                <li><a href="#" class="block px-4 py-2 hover:bg-gray-200">Statistic 2</a></li>
-            </ul>
-        </li>
-        <li class="relative group">
-            <a href="#" class="hover:text-blue-500">User Guide</a>
-            <ul class="absolute hidden group-hover:block bg-white shadow-lg mt-1 rounded-lg p-2">
-                <li><a href="#" class="block px-4 py-2 hover:bg-gray-200">Guide 1</a></li>
-                <li><a href="#" class="block px-4 py-2 hover:bg-gray-200">Guide 2</a></li>
-            </ul>
-        </li>
-        <li><a href="#" class="hover:text-blue-500">Repository Staff</a></li>
-    </ul>
-</nav>
+    <?php include("_partials/_nav.php"); ?>
 
 
 
     <!-- Search Section -->
     <div class="w-3/4 lg:w-2/3 mx-auto bg-white p-4 rounded-lg shadow-md mb-6">
-        <span class="text-gray-600 font-semibold mr-2">Browse</span>
+        <span class="text-gray-600 font-semibold mr-2"><a href="#discoverByDataset">Browse</a></span>
         <input type="text" placeholder="Search here" id="searchInput"
             class="w-full p-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
             oninput="performSearch()">
@@ -117,6 +109,11 @@
                 class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full">❯</button>
         </div>
     </div>
+
+    <div class="marquee">
+        <p>This text will scroll from right to left</p>
+    </div>
+
 
     <!-- About Section -->
     <section class="hero">
@@ -193,7 +190,7 @@
         </div>
 
         <!-- Counters Section -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6" id="counter">
             <div class="bg-gradient-to-r from-green-400 to-green-600 text-white p-4 rounded-lg shadow-md text-center">
                 <h3 class="text-xl font-semibold">Total Registered Users</h3>
                 <p class="text-2xl mt-2 counter" data-count="1000">0</p>
@@ -215,18 +212,23 @@
 
 
     <!-- Individual subject card section -->
-    <section>
+    <section id="discoverByDataset">
         <div class="max-w-7xl mx-auto py-10">
             <h2 class="text-2xl font-semibold text-center text-gray-800 mb-8">Discover Datasets By</h2>
             <div class="flex">
                 <!-- Sidebar -->
                 <div class="w-1/4 rounded-lg p-4 shadow-lg" style="background-color: #f9f9f9;">
                     <ul class="space-y-4">
-                        <li><a href="#" class="block font-bold text-blue-600 hover:text-gray-900" id="sector-link">Social Science</a></li>
-                        <li><a href="#" class="block font-bold text-blue-600 hover:text-gray-900" id="groups-link">Humanities</a></li>
-                        <li><a href="#" class="block font-bold text-blue-600 hover:text-gray-900" id="central-link">Education & Communication</a></li>
-                        <li><a href="#" class="block font-bold text-blue-600 hover:text-gray-900" id="state-link">Management & Commerce</a></li>
-                        <li><a href="#" class="block font-bold text-blue-600 hover:text-gray-900" id="apis-link">Environment & Physical Studies</a></li>
+                        <li><a href="#" class="block font-bold text-blue-600 hover:text-gray-900"
+                                id="sector-link">Social Science</a></li>
+                        <li><a href="#" class="block font-bold text-blue-600 hover:text-gray-900"
+                                id="groups-link">Humanities</a></li>
+                        <li><a href="#" class="block font-bold text-blue-600 hover:text-gray-900"
+                                id="central-link">Education & Communication</a></li>
+                        <li><a href="#" class="block font-bold text-blue-600 hover:text-gray-900"
+                                id="state-link">Management & Commerce</a></li>
+                        <li><a href="#" class="block font-bold text-blue-600 hover:text-gray-900"
+                                id="apis-link">Environment & Physical Studies</a></li>
                     </ul>
                 </div>
 
@@ -340,7 +342,8 @@
     <section class="kagglers-section">
         <div class="container">
             <h2>What We Offer?</h2>
-            <p>We are a dynamic community of social scientists, professionals, and researchers, providing access to a wide range of innovative datasets, models, and expert insights in the field of social science.</p>
+            <p>We are a dynamic community of social scientists, professionals, and researchers, providing access to a
+                wide range of innovative datasets, models, and expert insights in the field of social science.</p>
 
             <!-- Avatars Section -->
             <div class="kagglers-avatars">
@@ -353,13 +356,60 @@
 
     </section>
 
-    <!-- Footer Section -->
-    <footer class="bg-gray-800 text-white p-4 mt-6">
-        <div class="container mx-auto text-center space-y-2">
-            <p>About Us | Contact Us | Project Team | Dataset Standards | Sitemap | Privacy Policy | FAQ</p>
-            <p>&copy; 2024 pandoraBytes. All rights reserved.</p>
+
+    <!-- Feed back form -->
+
+    <!-- Feedback Form Section -->
+    <section class="bg-gray-100 py-10">
+        <div class="w-3/4 lg:w-2/3 mx-auto bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-center text-2xl font-semibold text-gray-800 mb-4">We Value Your Feedback!</h2>
+            <p class="text-center text-gray-600 mb-6">Let us know what you think about ARDMS and how we can improve.</p>
+
+            <form action="submit_feedback.php" method="POST" class="space-y-4">
+                <div>
+                    <label for="name" class="block text-gray-700">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Your Name"
+                        class="w-full p-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-200">
+                </div>
+
+                <div>
+                    <label for="email" class="block text-gray-700">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Your Email"
+                        class="w-full p-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-200">
+                </div>
+
+                <div>
+                    <label for="rating" class="block text-gray-700">Rating</label>
+                    <select id="rating" name="rating"
+                        class="w-full p-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-200">
+                        <option value="" disabled selected>Select a rating</option>
+                        <option value="5">Excellent</option>
+                        <option value="4">Very Good</option>
+                        <option value="3">Good</option>
+                        <option value="2">Fair</option>
+                        <option value="1">Poor</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="comments" class="block text-gray-700">Comments</label>
+                    <textarea id="comments" name="comments" placeholder="Your Feedback" rows="4"
+                        class="w-full p-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-200"></textarea>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit"
+                        class="px-6 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300">
+                        Submit Feedback
+                    </button>
+                </div>
+            </form>
         </div>
-    </footer>
+    </section>
+
+
+    <!-- Footer Section -->
+    <?php include("_partials/_footer.php"); ?>
 
 
     <script src="../v2/assets/home/script.js"></script>
@@ -367,7 +417,7 @@
         // JavaScript to toggle card sets
         const categories = ['sector', 'groups', 'central', 'state', 'apis'];
         categories.forEach(category => {
-            document.getElementById(`${category}-link`).addEventListener('click', function() {
+            document.getElementById(`${category}-link`).addEventListener('click', function () {
 
                 event.preventDefault();
                 // Hide all card sets
@@ -377,7 +427,7 @@
                 document.getElementById(`${category}-cards`).classList.add('active');
             });
         });
-    
+
         // Carousel functionality
         let currentSlide = 0;
         const slides = document.querySelectorAll("#carousel > div");
