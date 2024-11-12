@@ -4,12 +4,12 @@
         <!-- Leftmost Logo -->
         <div class="flex items-center space-x-2">
             <img src="assets/images/5881819337071905990.jpg" alt="Left Logo" class="h-8 w-8">
-            <span class="text-xl font-bold">Repository Name</span>
+            <span class="text-xl font-bold">ARDMS</span>
         </div>
 
         <!-- Rightmost Logo and Login Button -->
         <div class="flex items-center space-x-4">
-            <button class="bg-black text-white py-1 px-4 rounded-lg hover:bg-gray-300 hover:text-black">Login</button>
+            <button class="bg-black text-white py-1 px-4 rounded-lg hover:bg-gray-300 hover:text-black"><a href="auth/login.php">Login</a></button>
             <img src="assets/images/5881819337071905989.jpg" alt="Right Logo" class="h-8 w-8">
         </div>
 

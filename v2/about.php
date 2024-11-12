@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="../v2/assets/home/styles.css">
 </head>
 
-< class="bg-gray-100 text-gray-900">
+
     <!-- Header Section -->
     <?php include("_partials/_nav.php"); ?>
 
