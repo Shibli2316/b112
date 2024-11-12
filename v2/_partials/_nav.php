@@ -25,8 +25,11 @@
         <li class="relative group">
             <a href="#" class="hover:text-blue-500">Datasets</a>
             <ul class="absolute hidden group-hover:block bg-white shadow-lg mt-1 rounded-lg p-2">
-                <li><a href="#" class="block px-4 py-2 hover:bg-gray-200">Dataset 1</a></li>
-                <li><a href="#" class="block px-4 py-2 hover:bg-gray-200">Dataset 2</a></li>
+                <li><a href="#" class="block px-4 py-2 hover:bg-gray-200">Social Science - 512</a></li>
+                <li><a href="#" class="block px-4 py-2 hover:bg-gray-200">Humanities - 20</a></li>
+                <li><a href="#" class="block px-4 py-2 hover:bg-gray-200">Education and Communities - 120</a></li>
+                <li><a href="#" class="block px-4 py-2 hover:bg-gray-200">Management and Commerce - 56</a></li>
+                <li><a href="#" class="block px-4 py-2 hover:bg-gray-200">Environment and physical studies - 78</a></li>
             </ul>
         </li>
         <li><a href="index.php#counter" class="hover:text-blue-500">Subjects</a></li>
