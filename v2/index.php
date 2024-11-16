@@ -43,6 +43,9 @@
             position: relative;
             border-radius: 8px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+            margin-top: 50px;
+            margin-bottom: 50px;
+            z-index: -1;
         }
 
         .marquee p {
@@ -95,8 +98,40 @@
     <!-- Navigation Bar -->
     <?php include("_partials/_nav.php"); ?>
    
+    <div class='marquee flex'>
+    <?php
+                $sqlNews = "SELECT message FROM `notice` where issue_for = 'viewer'";
+                $resultNews = mysqli_query($conn, $sqlNews);
+                $sno = 0;
+                while ($rowNews = mysqli_fetch_assoc($resultNews)) {
+                    echo "<p>".$rowNews['message']."</p>";
+                    echo "<br />";
+                }
+                ?>
+        
+    </div>
 
 
+    
+
+
+
+
+
+    <!-- Image Carousel Section -->
+    <!-- <div class="w-3/4 lg:w-4/5 mx-auto bg-white p-4 rounded-lg shadow-md mb-6 mt-8"> -->
+        <div class="relative bg-blue-100 h-80 rounded-lg overflow-hidden mb-6 mt-4">
+            <div id="carousel" class="h-full flex transition-all duration-700 ease-in-out">
+                <div class="w-full flex-shrink-0 flex items-center justify-center">Image 1</div>
+                <div class="w-full flex-shrink-0 flex items-center justify-center">Image 2</div>
+                <div class="w-full flex-shrink-0 flex items-center justify-center">Image 3</div>
+            </div>
+            <button onclick="prevSlide()"
+                class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full">❮</button>
+            <button onclick="nextSlide()"
+                class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full">❯</button>
+        </div>
+    <!-- </div> -->
 
     <div class="w-3/4 lg:w-2/3 mx-auto bg-white p-4 rounded-lg shadow-md mb-6">
         <div class="md:flex md:items-center gap-4">
@@ -112,40 +147,8 @@
     </div>
 
 
-
-
-
-    <!-- Image Carousel Section -->
-    <div class="w-3/4 lg:w-4/5 mx-auto bg-white p-4 rounded-lg shadow-md mb-6 mt-8">
-        <div class="relative bg-blue-100 h-80 rounded-lg overflow-hidden mb-6">
-            <div id="carousel" class="h-full flex transition-all duration-700 ease-in-out">
-                <div class="w-full flex-shrink-0 flex items-center justify-center">Image 1</div>
-                <div class="w-full flex-shrink-0 flex items-center justify-center">Image 2</div>
-                <div class="w-full flex-shrink-0 flex items-center justify-center">Image 3</div>
-            </div>
-            <button onclick="prevSlide()"
-                class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full">❮</button>
-            <button onclick="nextSlide()"
-                class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full">❯</button>
-        </div>
-    </div>
-
-    <div class='marquee flex'>
-    <?php
-                $sqlNews = "SELECT message FROM `notice` where issue_for = 'viewer'";
-                $resultNews = mysqli_query($conn, $sqlNews);
-                $sno = 0;
-                while ($rowNews = mysqli_fetch_assoc($resultNews)) {
-                    echo "<p>".$rowNews['message']."</p>";
-                    echo "<br />";
-                }
-                ?>
-        
-    </div>
-
-
     <!-- About Section -->
-    <section class="hero">
+    <section class="hero" style="background-color: #A8D5BA;">
         <div class="container">
             <div class="hero-content">
                 <h1>Level up with the largest community Dataset</h1>
@@ -163,7 +166,7 @@
 
 
     <!-- Who's on ARDMS Section -->
-    <section class="kaggle-section">
+    <section class="kaggle-section" style="background-color: #F4F4F9;">
         <h1 class="text-xl">Who's on ARDMS?</h1>
         <!-- Center the below div -->
         <div class="container mx-auto">
@@ -194,7 +197,8 @@
     </section>
 
     <!-- Recently Added Datasets Section -->
-    <div class="w-3/4 lg:w-2/3 mx-auto bg-white p-4 rounded-lg shadow-md mb-6">
+    <section class="hero" style="background-color: #A8D5BA;">
+    <div class="w-3/4 lg:w-2/3 mx-auto  p-4  mb-6 mt-4">
         <div class="p-4 rounded-lg mb-6">
             <h2 class="text-center text-xl font-semibold text-gray-700 mb-4 mt-3">Recently Added Datasets</h2>
 
@@ -208,7 +212,9 @@
                 $result = mysqli_query($conn, $sql);
                 $sno = 0;
                 while ($row = mysqli_fetch_assoc($result)) {
-                    echo "<div class='bg-gray-100 p-4 rounded-lg shadow-md'>
+                    $id_paper = $row["_id"];
+                    echo "
+                    <a href='scholar/viewData.php?id=".$id_paper."'><div class='bg-gray-100 p-4 rounded-lg shadow-md'>
                     <h3 class='font-bold text-gray-700'>" . $row['research_area'] . "</h3>
                     <p class='text-sm text-gray-500'>" . $row['author'] . "</p>
                     <p class='text-gray-600 mt-2'>" . $row['research_theme'] . "</p>
@@ -239,10 +245,11 @@
             </div>
         </div>
     </div>
+    </section>
 
 
     <!-- Individual subject card section -->
-    <section id="discoverByDataset">
+    <section id="discoverByDataset" style="background-color: #F4F4F9;">
         <div class="max-w-7xl mx-auto py-10">
             <h2 class="text-2xl font-semibold text-center text-gray-800 mb-8">Browse datasets by subject: </h2>
             <div class="flex">
@@ -369,7 +376,7 @@
     </section>
 
     <!-- Who are Kagglers Section -->
-    <section class="kagglers-section">
+    <section class="kagglers-section" style="background-color: #A8D5BA;">
         <div class="container">
             <h2>What We Offer?</h2>
             <p>We are a dynamic community of social scientists, professionals, and researchers, providing access to a
@@ -386,7 +393,7 @@
     <!-- Feed back form -->
 
     <!-- Feedback Form Section -->
-    <section class="bg-gray-100 py-10" id="feedback">
+    <section class=" py-10" id="feedback">
         <div class="w-3/4 lg:w-2/3 mx-auto bg-white p-6 rounded-lg shadow-md">
             <h2 class="text-center text-2xl font-semibold text-gray-800 mb-4">We Value Your Feedback!</h2>
             <p class="text-center text-gray-600 mb-6">Let us know what you think about ARDMS and how we can improve.</p>
@@ -395,19 +402,19 @@
                 <div>
                     <label for="name" class="block text-gray-700">Name</label>
                     <input type="text" id="name" name="name" placeholder="Your Name"
-                        class="w-full p-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-200">
+                        class="w-full p-2 border rounded-lg focus:outline-none focus:ring focus:ring-green-200">
                 </div>
 
                 <div>
                     <label for="email" class="block text-gray-700">Email</label>
                     <input type="email" id="email" name="email" placeholder="Your Email"
-                        class="w-full p-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-200">
+                        class="w-full p-2 border rounded-lg focus:outline-none focus:ring focus:ring-green-200">
                 </div>
 
                 <div>
                     <label for="rating" class="block text-gray-700">Rating</label>
                     <select id="rating" name="rating"
-                        class="w-full p-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-200">
+                        class="w-full p-2 border rounded-lg focus:outline-none focus:ring focus:ring-green-200">
                         <option value="" disabled selected>Select a rating</option>
                         <option value="5">Excellent</option>
                         <option value="4">Very Good</option>
@@ -420,12 +427,12 @@
                 <div>
                     <label for="comments" class="block text-gray-700">Comments</label>
                     <textarea id="comments" name="comments" placeholder="Your Feedback" rows="4"
-                        class="w-full p-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-200"></textarea>
+                        class="w-full p-2 border rounded-lg focus:outline-none focus:ring focus:ring-green-200"></textarea>
                 </div>
 
                 <div class="text-center">
                     <button type="submit"
-                        class="px-6 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300">
+                        class="px-6 py-2 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 focus:outline-none focus:ring focus:ring-green-300">
                         Submit Feedback
                     </button>
                 </div>

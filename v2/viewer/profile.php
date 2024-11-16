@@ -29,7 +29,7 @@ $rowUserData = mysqli_fetch_assoc($resultUserData);
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
                 
                 <!-- Card 2: Profile Information -->
-                <div class="bg-white p-4 rounded-lg shadow-md relative">
+                <div class="bg-white p-4 rounded-lg shadow-md relative" style="background-color: #F4F4F9;">
                     <h2 class="font-semibold text-lg mb-2">Profile Information</h2>
                     <p><strong>Full Name:</strong><?=$rowUserData['name']?></p>
                     <p><strong>Mobile:</strong>
@@ -52,7 +52,7 @@ $rowUserData = mysqli_fetch_assoc($resultUserData);
                 </div>
 
                 <!-- Card 3: Conversations -->
-                <div class="bg-white p-4 rounded-lg shadow-md">
+                <div class="bg-white p-4 rounded-lg shadow-md" style="background-color: #F4F4F9;">
                     <h2 class="font-semibold text-lg mb-2">Notice</h2>
                     <?php
                         $sql = "SELECT * FROM `notice` where `notice`.`issue_for` = 'viewer' limit 3";
