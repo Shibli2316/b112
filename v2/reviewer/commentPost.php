@@ -8,6 +8,9 @@ $insert = false;
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $comment = $_POST['comment'];
+
+    $comment = mysqli_real_escape_string($conn, $comment);
+     
     $sql = "INSERT INTO comment_logs (comment, paper_id) VALUES ('$comment', '$id_paper');";
         $result = mysqli_query($conn, $sql);
         if ($result) {

@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <div class="logo">
-            <h1>Quirkle</h1>
+            <h1>ARDMS</h1>
         </div>
         <div class="sign-in-box">
             <h2>Sign In</h2>

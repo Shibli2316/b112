@@ -24,6 +24,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $tempname = $_FILES["upload"]["tmp_name"];
     $folder = "datasets/".$filename;
     move_uploaded_file($tempname, $folder);
+ 
+    // --------FILTERING//
+    $author = mysqli_real_escape_string($conn, $author);
+    $research_area = mysqli_real_escape_string($conn, $research_area);
+    $course_enrolled = mysqli_real_escape_string($conn, $course_enrolled);
+    $research_theme = mysqli_real_escape_string($conn, $research_theme);
+    $research_note = mysqli_real_escape_string($conn, $research_note);
+    $research_org = mysqli_real_escape_string($conn, $research_org);
+    $address_org = mysqli_real_escape_string($conn, $address_org);
+    $funding = mysqli_real_escape_string($conn, $funding);
+    $supervisor = mysqli_real_escape_string($conn, $supervisor);
+    $cosupervisor = mysqli_real_escape_string($conn, $cosupervisor);
+    // --------Filtering//
 
     
     $sql = "INSERT INTO `datasets` (`author`, `scholar_id`, `research_area`, `enrolled_course`, `research_theme`, `research_note`, `research_org`, `org_address`, `funding`, `supervisor`, `co-supervisor`, `data_type`, `data_format`, `data_location`) VALUES ('$author', '$user_id', '$research_area', '$course_enrolled', '$research_theme', '$research_note', '$research_org',  '$address_org', '$funding', '$supervisor', '$cosupervisor', '$data_type', '$data_format', '$folder')";
@@ -79,7 +92,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                     <div class="mb-6">
                         <label for="research_area" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Research Area</label>
-                        <input type="text" id="research_area" name="research_area" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="abc@def.com" required />
+                        <select name="research_area" id="research_area" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                        <option value=''>--SELECT--</option>
+                        <option value='economics'>Economics</option>
+                        <option value='political sci'>Political Science</option>
+                        <option value='sociology'>Sociology</option>
+                        <option value='psycology'>Psycology</option>
+                        <option value='social work'>Social Work</option>
+                        <option value='women studies'>Women Studies</option>
+                        <option value='history'>History</option>
+                        <option value='philosophy'>Philosophy</option>
+                        <option value='education'>Education</option>
+                        <option value='mass communication'>Mass Communication</option>
+                        <option value='library and information science'>Library and Information Science</option>
+                        <option value='management'>Management</option>
+                        <option value='commerce'>Commerce</option>
+                        <option value='EVS'>Environmental Studies</option>
+                        <option value='PHE'>Physical Education</option>
+                        </select>
                     </div>
                     <div class="mb-6">
                         <label for="research_theme" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Research Theme</label>
@@ -115,11 +145,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                     <div class="mb-6">
                         <label for="data_type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Data Type</label>
-                        <input type="text" id="data_type" name="data_type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="123ABC" required />
+                        <select name="data_type" id="data_type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                        <option value=''>--SELECT--</option>
+                        <option value='Primary'>Primary</option>
+                        <option value='Secondary'>Secondary</option>
+                        <option value='Tertiary'>Tertiary</option>
+                        <option value='Qualitative Research Data'>Qualitative Research Data</option>
+                        <option value='Quantitative Research Data'>Quantitative Research Data</option>
+                        <option value='Observatory'>Observatory</option>
+                        <option value='Experimental Data'>Experimental Data</option>
+                        <option value='Statistical Data'>Statistical Data</option>
+                        <option value='Survey Data'>Survey Data</option>
+                        <option value='Structured Text'>Structured Text</option>
+                        <option value='Plain Text'>Plain Text</option>
+                        </select>
                     </div>
                     <div class="mb-6">
                         <label for="data_format" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Data Format</label>
-                        <input type="text" id="data_format" name="data_format" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="123ABC" required />
+                        <select name="data_format" id="data_format" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                        <option value=''>--SELECT--</option>
+                        <option value='Textual Document'>Textual Document</option>
+                        <option value='PDF Files'>PDF Files</option>
+                        <option value='Word Files'>Word Files</option>
+                        <option value='Images/Photography'>Images/Photography</option>
+                        <option value='Videos'>Videos</option>
+                        <option value='Survey Sample'>Survey Sample</option>
+                        <option value='Scripts'>Scripts</option>
+                        <option value='Audiotapes'>Audiotapes</option>
+                        <option value='Graphs'>Graphs</option>
+                        <option value='Spreadsheet'>Spreadsheet</option>
+                        <option value='Metadata'>Metadata</option>
+                        </select>
                     </div>
                     <div class="mb-6">
                         <input type="file" id="upload" name="upload" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required />

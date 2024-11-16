@@ -9,6 +9,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $title = $_POST['title'];
     $msg = $_POST['msg'];
     $receiver = $_POST['receiver'];
+
+    $title = mysqli_real_escape_string($conn, $title);
+     $msg = mysqli_real_escape_string($conn, $msg);
+
+
+
     $sql = "INSERT INTO notice (title, message, issue_for) VALUES ('$title', '$msg', '$receiver');";
         $result = mysqli_query($conn, $sql);
         if ($result) {

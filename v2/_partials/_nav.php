@@ -1,10 +1,12 @@
+<?php include_once("statsHome.php"); ?>
+
 <header class="bg-white text-black p-4 rounded-b-lg shadow-md">
     <div class="container mx-auto flex justify-between items-center">
 
         <!-- Leftmost Logo -->
         <div class="flex items-center space-x-2">
             <img src="assets/images/5881819337071905990.jpg" alt="Left Logo" class="h-8 w-8">
-            <span class="text-xl font-bold">ARDMS</span>
+            <a href="index.php"><span class="text-xl font-bold">ARDMS</span></a>
         </div>
 
         <!-- Rightmost Logo and Login Button -->
@@ -24,21 +26,23 @@
         <li><a href="scholar/addDatasets.php" class="hover:text-blue-500">Data Upload</a></li>
         <li class="relative group">
             <a href="#" class="hover:text-blue-500">Datasets</a>
-            <ul class="absolute hidden group-hover:block bg-white shadow-lg mt-1 rounded-lg p-2">
-                <li><a href="#" class="block px-4 py-2 hover:bg-gray-200">Social Science - 512</a></li>
-                <li><a href="#" class="block px-4 py-2 hover:bg-gray-200">Humanities - 20</a></li>
-                <li><a href="#" class="block px-4 py-2 hover:bg-gray-200">Education and Communities - 120</a></li>
-                <li><a href="#" class="block px-4 py-2 hover:bg-gray-200">Management and Commerce - 56</a></li>
-                <li><a href="#" class="block px-4 py-2 hover:bg-gray-200">Environment and physical studies - 78</a></li>
+            <ul class="absolute hidden group-hover:block bg-white shadow-lg mt-1 rounded-lg p-2 w-80">
+                <li><a href="#" class="block px-4 py-2 text-sm hover:bg-gray-200">Social Science - <?=$sumSS?></a></li>
+                <li><a href="#" class="block px-4 py-2 text-sm hover:bg-gray-200">Humanities - <?=$sumH?></a></li>
+                <li><a href="#" class="block px-4 py-2 text-sm hover:bg-gray-200">Education and Communities - <?=$sumEnC?></a></li>
+                <li><a href="#" class="block px-4 py-2 text-sm hover:bg-gray-200">Management and Commerce - <?=$sumMnC?></a></li>
+                <li><a href="#" class="block px-4 py-2 text-sm hover:bg-gray-200">Environment and physical studies - <?=$sumEnP?></a></li>
             </ul>
         </li>
         <li><a href="index.php#counter" class="hover:text-blue-500">Subjects</a></li>
         
         <li class="relative group">
             <a href="#" class="hover:text-blue-500">User Guide</a>
-            <ul class="absolute hidden group-hover:block bg-white shadow-lg mt-1 rounded-lg p-2">
-                <li><a href="#" class="block px-4 py-2 hover:bg-gray-200">Guide 1</a></li>
-                <li><a href="#" class="block px-4 py-2 hover:bg-gray-200">Guide 2</a></li>
+            <ul class="absolute hidden group-hover:block bg-white shadow-lg mt-1 rounded-lg p-2 w-80">
+                <!-- User guide ka download link yaha dal dena hash ko replace kar ke. Make a folder in assets called userGuide and give the path as follows ------ assets/userGuide/[filename.pdf] -->
+                 <!-- in case you need one more option make a copy of the follwing code -->
+                <li><a href="#" class="block px-4 py-2 text-sm hover:bg-gray-200" download>Guide 1</a></li>
+                <li><a href="#" class="block px-4 py-2 text-sm hover:bg-gray-200">Guide 2</a></li>
             </ul>
         </li>
         

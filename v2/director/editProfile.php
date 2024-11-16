@@ -18,6 +18,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $org_address = $_POST['org_address'];
     $designation = $_POST['designation'];
 
+     // --------FILTERING//
+     $fullName = mysqli_real_escape_string($conn, $fullName);
+     $phone = mysqli_real_escape_string($conn, $phone);
+     $org_address = mysqli_real_escape_string($conn, $org_address);
+     $designation = mysqli_real_escape_string($conn, $designation);
+     
+     // --------Filtering//
+
     
     $sql = "UPDATE `admin` SET `name` = '$fullName', `phone` = '$phone', `org_address` = '$org_address', `designation` = '$designation' WHERE `admin`.`email` = '$userEmail'";
     $result = mysqli_query($conn, $sql);

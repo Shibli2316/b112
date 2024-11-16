@@ -18,6 +18,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $research_intrest = $_POST['research_intrest'];
     $designation = $_POST['designation'];
 
+    $fullName = mysqli_real_escape_string($conn, $fullName);
+     $phone = mysqli_real_escape_string($conn, $phone);
+     $research_intrest = mysqli_real_escape_string($conn, $research_intrest);
+     $designation = mysqli_real_escape_string($conn, $designation);
+
     
     $sql = "UPDATE `reviewer` SET `name` = '$fullName', `phone` = '$phone', `research_intrest` = '$research_intrest', `designation` = '$designation' WHERE `reviewer`.`email` = '$userEmail'";
     $result = mysqli_query($conn, $sql);

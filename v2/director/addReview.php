@@ -21,6 +21,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $created_password = $_POST['created_password'];
 
 
+    // --------FILTERING//
+    $name = mysqli_real_escape_string($conn, $name);
+    $email = mysqli_real_escape_string($conn, $email);
+    $created_password = mysqli_real_escape_string($conn, $created_password);
+    
+    // --------Filtering//
+
+
 
     $existSql = "SELECT * FROM `auth` WHERE email= '$email'";
     $result = mysqli_query($conn, $existSql);

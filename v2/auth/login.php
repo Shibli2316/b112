@@ -11,7 +11,7 @@
 <body style="margin: 80px;">
     <div class="container">
         <div class="logo">
-            <h1>Quirkle</h1>
+            <h1>ARDMS</h1>
         </div>
         <div class="sign-in-box">
             <h2>Sign In</h2>
@@ -52,7 +52,7 @@
         </a>
     </div>
     <div class="support">
-        <a href="#">Contact Us / Support</a>
+        <a href="../contactus.php">Contact Us</a> /  <a href="../index.php#feedback" >Support</a>
     </div>
 </body>
 

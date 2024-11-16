@@ -26,6 +26,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $folder = "datasets/".$filename;
     move_uploaded_file($tempname, $folder);
 
+     // --------FILTERING//
+     $author = mysqli_real_escape_string($conn, $author);
+     $research_area = mysqli_real_escape_string($conn, $research_area);
+     $course_enrolled = mysqli_real_escape_string($conn, $course_enrolled);
+     $research_theme = mysqli_real_escape_string($conn, $research_theme);
+     $research_note = mysqli_real_escape_string($conn, $research_note);
+     $research_org = mysqli_real_escape_string($conn, $research_org);
+     $address_org = mysqli_real_escape_string($conn, $address_org);
+     $funding = mysqli_real_escape_string($conn, $funding);
+     $supervisor = mysqli_real_escape_string($conn, $supervisor);
+     $cosupervisor = mysqli_real_escape_string($conn, $cosupervisor);
+     // --------Filtering//
+
     
     $sql = "INSERT INTO `datasets` (`author`, `scholar_id`, `research_area`, `enrolled_course`, `research_theme`, `research_note`, `org_address`, `funding`, `supervisor`, `co-supervisor`, `data_type`, `data_format`, `data_location`) VALUES ('$author', '$user_id', '$research_area', '$course_enrolled', '$research_theme', '$research_note', '$address_org', '$funding', '$supervisor', '$cosupervisor', '$data_type', '$data_format', '$folder')";
     $result = mysqli_query($conn, $sql);

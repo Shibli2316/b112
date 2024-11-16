@@ -39,16 +39,12 @@
             width: 100%;
             overflow: hidden;
             background-color: #4CAF50;
-            /* Green background */
             padding: 10px 0;
             position: relative;
             border-radius: 8px;
-            /* Optional: Rounded corners */
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
-            /* Shadow effect to pop out */
         }
 
-        /* Marquee text */
         .marquee p {
             display: inline-block;
             white-space: nowrap;
@@ -56,7 +52,6 @@
             font-weight: bold;
             color: #ffffff;
             animation: scroll 10s linear infinite;
-            /* Adjust time to control speed */
             margin: 0;
             width: 100%;
         }
@@ -65,17 +60,33 @@
         @keyframes scroll {
             0% {
                 transform: translateX(100%);
-                /* Start from the right edge */
+                
             }
 
             100% {
                 transform: translateX(-100%);
-                /* Move to the left edge */
+                
             }
+        }
+
+        #searchResults {
+            display: none;
+           
+            position: absolute;
+            
+            z-index: 10;
+            
+            width: 65%;
+            
+        }
+
+        #searchResults.active {
+            display: block;
+            
         }
     </style>
 
-    <!-- CHange ends here -->
+    <!-- Change ends here -->
 
     <link rel="stylesheet" href="../v2/assets/home/styles.css">
 </head>
@@ -83,20 +94,29 @@
 <body>
     <!-- Navigation Bar -->
     <?php include("_partials/_nav.php"); ?>
+   
 
 
 
-    <!-- Search Section -->
     <div class="w-3/4 lg:w-2/3 mx-auto bg-white p-4 rounded-lg shadow-md mb-6">
-        <span class="text-gray-600 font-semibold mr-2"><a href="#discoverByDataset">Browse</a></span>
-        <input type="text" placeholder="Search here" id="searchInput"
-            class="w-full p-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
-            oninput="performSearch()">
-        <div id="searchResults" class="mt-2"></div>
+        <div class="md:flex md:items-center gap-4">
+            <span class="text-gray-600 font-semibold mr-2 md:w-1/7">
+                <a href="#discoverByDataset">Browse</a>
+            </span>
+            <input type="text" placeholder="Search here" id="searchInput"
+                class="w-full p-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
+                oninput="performSearch()">
+        </div>
+        <!-- Search Results -->
+        <div id="searchResults" class="mt-2 p-2 bg-white border border-gray-300 rounded-lg shadow-md"></div>
     </div>
 
+
+
+
+
     <!-- Image Carousel Section -->
-    <div class="w-3/4 lg:w-4/5 mx-auto bg-white p-4 rounded-lg shadow-md mb-6">
+    <div class="w-3/4 lg:w-4/5 mx-auto bg-white p-4 rounded-lg shadow-md mb-6 mt-8">
         <div class="relative bg-blue-100 h-80 rounded-lg overflow-hidden mb-6">
             <div id="carousel" class="h-full flex transition-all duration-700 ease-in-out">
                 <div class="w-full flex-shrink-0 flex items-center justify-center">Image 1</div>
@@ -110,8 +130,17 @@
         </div>
     </div>
 
-    <div class="marquee">
-        <p>This text will scroll from right to left</p>
+    <div class='marquee flex'>
+    <?php
+                $sqlNews = "SELECT message FROM `notice` where issue_for = 'viewer'";
+                $resultNews = mysqli_query($conn, $sqlNews);
+                $sno = 0;
+                while ($rowNews = mysqli_fetch_assoc($resultNews)) {
+                    echo "<p>".$rowNews['message']."</p>";
+                    echo "<br />";
+                }
+                ?>
+        
     </div>
 
 
@@ -135,8 +164,9 @@
 
     <!-- Who's on ARDMS Section -->
     <section class="kaggle-section">
-        <div class="container">
-            <h1 class="text-xl">Who’s on ARDMS?</h1>
+        <h1 class="text-xl">Who's on ARDMS?</h1>
+        <!-- Center the below div -->
+        <div class="container mx-auto">
             <div class="kaggle-cards">
                 <div class="kaggle-card">
                     <img src="../v2/assets/home/learner.png" alt="Learners">
@@ -166,26 +196,26 @@
     <!-- Recently Added Datasets Section -->
     <div class="w-3/4 lg:w-2/3 mx-auto bg-white p-4 rounded-lg shadow-md mb-6">
         <div class="p-4 rounded-lg mb-6">
-            <h2 class="text-center text-lg font-semibold text-gray-700 mb-4">Recently Added Datasets</h2>
+            <h2 class="text-center text-xl font-semibold text-gray-700 mb-4 mt-3">Recently Added Datasets</h2>
+
+
+
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div class="bg-gray-100 p-4 rounded-lg shadow-md">
-                    <h3 class="font-bold text-gray-700">Dataset Name 1</h3>
-                    <p class="text-sm text-gray-500">by Author 1</p>
-                    <p class="text-gray-600 mt-2">A brief description about Dataset 1, covering the purpose and
-                        relevance in around 50-80 words.</p>
-                </div>
-                <div class="bg-gray-100 p-4 rounded-lg shadow-md">
-                    <h3 class="font-bold text-gray-700">Dataset Name 2</h3>
-                    <p class="text-sm text-gray-500">by Author 2</p>
-                    <p class="text-gray-600 mt-2">A brief description about Dataset 2, covering the purpose and
-                        relevance in around 50-80 words.</p>
-                </div>
-                <div class="bg-gray-100 p-4 rounded-lg shadow-md">
-                    <h3 class="font-bold text-gray-700">Dataset Name 3</h3>
-                    <p class="text-sm text-gray-500">by Author 3</p>
-                    <p class="text-gray-600 mt-2">A brief description about Dataset 3, covering the purpose and
-                        relevance in around 50-80 words.</p>
-                </div>
+
+
+                <?php
+                $sql = "SELECT * FROM `datasets` where accepted = 1 ORDER BY created_at DESC LIMIT 3";
+                $result = mysqli_query($conn, $sql);
+                $sno = 0;
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo "<div class='bg-gray-100 p-4 rounded-lg shadow-md'>
+                    <h3 class='font-bold text-gray-700'>" . $row['research_area'] . "</h3>
+                    <p class='text-sm text-gray-500'>" . $row['author'] . "</p>
+                    <p class='text-gray-600 mt-2'>" . $row['research_theme'] . "</p>
+                </div>";
+                }
+                ?>
+
             </div>
         </div>
 
@@ -193,11 +223,11 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6" id="counter">
             <div class="bg-gradient-to-r from-green-400 to-green-600 text-white p-4 rounded-lg shadow-md text-center">
                 <h3 class="text-xl font-semibold">Total Registered Users</h3>
-                <p class="text-2xl mt-2 counter" data-count="1000">0</p>
+                <p class="text-2xl mt-2 counter" data-count="<?= $rowUser[0] ?>">0</p>
             </div>
             <div class="bg-gradient-to-r from-indigo-400 to-indigo-600 text-white p-4 rounded-lg shadow-md text-center">
                 <h3 class="text-xl font-semibold">Total Datasets</h3>
-                <p class="text-2xl mt-2 counter" data-count="500">0</p>
+                <p class="text-2xl mt-2 counter" data-count="<?= $rowDatasets[0] ?>">0</p>
             </div>
             <div class="bg-gradient-to-r from-purple-400 to-purple-600 text-white p-4 rounded-lg shadow-md text-center">
                 <h3 class="text-xl font-semibold">Total Downloads</h3>
@@ -214,7 +244,7 @@
     <!-- Individual subject card section -->
     <section id="discoverByDataset">
         <div class="max-w-7xl mx-auto py-10">
-            <h2 class="text-2xl font-semibold text-center text-gray-800 mb-8">Discover Datasets By</h2>
+            <h2 class="text-2xl font-semibold text-center text-gray-800 mb-8">Browse datasets by subject: </h2>
             <div class="flex">
                 <!-- Sidebar -->
                 <div class="w-1/4 rounded-lg p-4 shadow-lg" style="background-color: #f9f9f9;">
@@ -239,32 +269,32 @@
                     <div class="category-cards active grid grid-cols-3 gap-6" id="sector-cards">
                         <div class="bg-white border border-gray-200 rounded-lg shadow-lg p-6 text-center">
                             <img src="assets/images/eco.png" alt="Economy" class="w-12 h-12 mx-auto mb-4">
-                            <p>5</p>
+                            <p><?= $rowEconomics[0] ?></p>
                             <p class="font-bold text-lg text-gray-800">Economics</p>
                         </div>
                         <div class="bg-white border border-gray-200 rounded-lg shadow-lg p-6 text-center">
                             <img src="assets/images/ps.jfif" alt="Education" class="w-12 h-12 mx-auto mb-4">
-                            <p>8</p>
+                            <p><?= $rowPoliticalSci[0] ?></p>
                             <p class="font-bold text-lg text-gray-800">Political Science</p>
                         </div>
                         <div class="bg-white border border-gray-200 rounded-lg shadow-lg p-6 text-center">
                             <img src="assets/images/soc.png" alt="Environment" class="w-12 h-12 mx-auto mb-4">
-                            <p>12</p>
+                            <p><?= $rowSociology[0] ?></p>
                             <p class="font-bold text-lg text-gray-800">Sociology</p>
                         </div>
                         <div class="bg-white border border-gray-200 rounded-lg shadow-lg p-6 text-center">
                             <img src="assets/images/pso.jfif" alt="Environment" class="w-12 h-12 mx-auto mb-4">
-                            <p>91</p>
+                            <p><?= $rowPsycology[0] ?></p>
                             <p class="font-bold text-lg text-gray-800">Psycology</p>
                         </div>
                         <div class="bg-white border border-gray-200 rounded-lg shadow-lg p-6 text-center">
                             <img src="assets/images/sw.jfif" alt="Environment" class="w-12 h-12 mx-auto mb-4">
-                            <p>53</p>
+                            <p><?= $rowSocialWork[0] ?></p>
                             <p class="font-bold text-lg text-gray-800">Social Work</p>
                         </div>
                         <div class="bg-white border border-gray-200 rounded-lg shadow-lg p-6 text-center">
                             <img src="assets/images/ws.jfif" alt="Environment" class="w-12 h-12 mx-auto mb-4">
-                            <p>38</p>
+                            <p><?= $rowWomenStudies[0] ?></p>
                             <p class="font-bold text-lg text-gray-800">Women Studies</p>
                         </div>
                     </div>
@@ -273,12 +303,12 @@
                     <div class="category-cards grid grid-cols-3 gap-6" id="groups-cards">
                         <div class="bg-white border border-gray-200 rounded-lg shadow-lg p-6 text-center">
                             <img src="assets/images/his.jfif" alt="Health" class="w-12 h-12 mx-auto mb-4">
-                            <p>97</p>
+                            <p><?= $rowHistory[0] ?></p>
                             <p class="font-bold text-lg text-gray-800">History</p>
                         </div>
                         <div class="bg-white border border-gray-200 rounded-lg shadow-lg p-6 text-center">
                             <img src="assets/images/philo.jfif" alt="Science" class="w-12 h-12 mx-auto mb-4">
-                            <p>81</p>
+                            <p><?= $rowPhilosophy[0] ?></p>
                             <p class="font-bold text-lg text-gray-800">Philosophy</p>
                         </div>
 
@@ -288,17 +318,17 @@
                     <div class="category-cards grid grid-cols-3 gap-6" id="central-cards">
                         <div class="bg-white border border-gray-200 rounded-lg shadow-lg p-6 text-center">
                             <img src="assets/images/edu.png" alt="Economy" class="w-12 h-12 mx-auto mb-4">
-                            <p>75</p>
+                            <p><?= $rowEducation[0] ?></p>
                             <p class="font-bold text-lg text-gray-800">Education</p>
                         </div>
                         <div class="bg-white border border-gray-200 rounded-lg shadow-lg p-6 text-center">
                             <img src="assets/images/mc.jfif" alt="Education" class="w-12 h-12 mx-auto mb-4">
-                            <p>96</p>
+                            <p><?= $rowMassCommunication[0] ?></p>
                             <p class="font-bold text-lg text-gray-800">Mass Communication</p>
                         </div>
                         <div class="bg-white border border-gray-200 rounded-lg shadow-lg p-6 text-center">
                             <img src="assets/images/liso.jfif" alt="Science" class="w-12 h-12 mx-auto mb-4">
-                            <p>97</p>
+                            <p><?= $rowLibrarySci[0] ?></p>
                             <p class="font-bold text-lg text-gray-800">Library and information Science</p>
                         </div>
                     </div>
@@ -307,12 +337,12 @@
                     <div class="category-cards grid grid-cols-3 gap-6" id="state-cards">
                         <div class="bg-white border border-gray-200 rounded-lg shadow-lg p-6 text-center">
                             <img src="assets/images/manage.png" alt="Labour" class="w-12 h-12 mx-auto mb-4">
-                            <p>96</p>
+                            <p><?= $rowManagement[0] ?></p>
                             <p class="font-bold text-lg text-gray-800">Management</p>
                         </div>
                         <div class="bg-white border border-gray-200 rounded-lg shadow-lg p-6 text-center">
                             <img src="assets/images/commer.png" alt="Health" class="w-12 h-12 mx-auto mb-4">
-                            <p>19</p>
+                            <p><?= $rowCommerce[0] ?></p>
                             <p class="font-bold text-lg text-gray-800">Commerce</p>
                         </div>
 
@@ -322,12 +352,12 @@
                     <div class="category-cards grid grid-cols-3 gap-6" id="apis-cards">
                         <div class="bg-white border border-gray-200 rounded-lg shadow-lg p-6 text-center">
                             <img src="assets/images/evs.png" alt="Health" class="w-12 h-12 mx-auto mb-4">
-                            <p>13</p>
+                            <p><?= $rowEVS[0] ?></p>
                             <p class="font-bold text-lg text-gray-800">Environmental Studies</p>
                         </div>
                         <div class="bg-white border border-gray-200 rounded-lg shadow-lg p-6 text-center">
                             <img src="assets/images/phe.jfif" alt="Science" class="w-12 h-12 mx-auto mb-4">
-                            <p>41</p>
+                            <p><?= $rowPHE[0] ?></p>
                             <p class="font-bold text-lg text-gray-800">Physical Education</p>
                         </div>
 
@@ -347,12 +377,8 @@
 
             <!-- Avatars Section -->
             <div class="kagglers-avatars">
-                <img src="../v2/assets/home/icon.png" alt="Kaggler 1">
-                <img src="../v2/assets/home/icon.png" alt="Kaggler 2">
-                <img src="../v2/assets/home/icon.png" alt="Kaggler 3">
-                <!-- Add more avatar images as needed -->
+                <img src="../v2/assets/home/icon.png" alt="Kaggler 1" </div>
             </div>
-        </div>
 
     </section>
 
@@ -360,7 +386,7 @@
     <!-- Feed back form -->
 
     <!-- Feedback Form Section -->
-    <section class="bg-gray-100 py-10">
+    <section class="bg-gray-100 py-10" id="feedback">
         <div class="w-3/4 lg:w-2/3 mx-auto bg-white p-6 rounded-lg shadow-md">
             <h2 class="text-center text-2xl font-semibold text-gray-800 mb-4">We Value Your Feedback!</h2>
             <p class="text-center text-gray-600 mb-6">Let us know what you think about ARDMS and how we can improve.</p>
@@ -451,13 +477,30 @@
         setInterval(nextSlide, 3000);
 
         // Search functionality
-        const searchData = ["Dataset 1", "Dataset 2", "Dataset 3"];
+        const searchData = <?= $authorsJson?>;
+
+
 
         function performSearch() {
             const query = document.getElementById('searchInput').value.toLowerCase();
             const results = searchData.filter(item => item.toLowerCase().includes(query));
-            document.getElementById('searchResults').innerHTML = results.map(result => `<p>${result}</p>`).join('');
+            const searchResults = document.getElementById('searchResults');
+
+            if (results.length > 0) {
+                searchResults.innerHTML = results.map(result => `<p class="py-1 px-2 hover:bg-gray-100 cursor-pointer">${result}</p>`).join('');
+                searchResults.classList.add('active');
+            } else {
+                searchResults.innerHTML = `<p class="text-gray-500">No results found.</p>`;
+                searchResults.classList.add('active');
+            }
+
+            if (!query) {
+                searchResults.innerHTML = '';
+                searchResults.classList.remove('active');
+            }
         }
+
+
 
         // Counter animation
         document.addEventListener("DOMContentLoaded", () => {

@@ -10,6 +10,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $enrollment = $_POST['enrollment'];
     $organisation = $_POST['organisation'];
 
+     // --------FILTERING//
+     $fullName = mysqli_real_escape_string($conn, $fullName);
+     $phone = mysqli_real_escape_string($conn, $phone);
+     $enrollment = mysqli_real_escape_string($conn, $enrollment);
+     $organisation = mysqli_real_escape_string($conn, $organisation);
+     
+     // --------Filtering//
+
     
     $sql = "UPDATE `profile` SET `name` = '$fullName', `phone` = '$phone', `enrollment` = '$enrollment', `organisation` = '$organisation' WHERE `profile`.`email` = '$userEmail'";
     $result = mysqli_query($conn, $sql);

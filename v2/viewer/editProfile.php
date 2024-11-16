@@ -8,6 +8,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $fullName = $_POST['fullName'];
     $phone = $_POST['phone'];
 
+    $fullName = mysqli_real_escape_string($conn, $fullName);
+     $phone = mysqli_real_escape_string($conn, $phone);
+
     
     $sql = "UPDATE `profile` SET `name` = '$fullName', `phone` = '$phone', `enrollment` = 'viewer', `organisation` = 'viewer' WHERE `profile`.`email` = '$userEmail'";
     $result = mysqli_query($conn, $sql);
