@@ -23,6 +23,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $comments = $_POST['comments'];
 
 
+    $name = mysqli_real_escape_string($conn, $name);
+     $email = mysqli_real_escape_string($conn, $email);
+     $rating = mysqli_real_escape_string($conn, $rating);
+     $comments = mysqli_real_escape_string($conn, $comments);
+
     
     $sql = "INSERT INTO `feedback` (`name`, `email`, `rating`, `comment`) VALUES ('$name', '$email', '$rating', '$comments')";
     $result = mysqli_query($conn, $sql);

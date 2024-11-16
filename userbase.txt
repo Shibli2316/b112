@@ -7,7 +7,3 @@ hamza - test@test - r - 1234567890
 hamza - sarim@sarim.com - r - 1234567890
 Ahmad Raza Shibli - hammad@testing.com - a - 1234567890
 Ahmad Raza Shibli - samuel97smith67@gmail.com - a - 1234567890
-
-
-
-color of pages
